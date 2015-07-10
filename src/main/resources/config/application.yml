@@ -1,0 +1,21 @@
+spring:
+    profiles.active: default,dev
+    view:
+        prefix: /WEB-INF/views/
+        suffix: .jsp
+
+server.port: 80
+
+logging.level: 
+    io.recruit: INFO
+    org.springframework: INFO
+    org.apache.tomcat.util.net.NioSelectorPool: INFO
+---
+spring.profiles: dev
+
+logging.config: classpath:config/logback.xml
+    
+---
+spring.profiles: real
+
+logging.config: file:d:/config/logback3.xml            

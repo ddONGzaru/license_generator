@@ -1,0 +1,16 @@
+#################################################################
+## DESC : 각 서비스클래스의 설정 프로퍼티 
+##
+## @Company ePapyrus.inc
+## @author ks-lee
+## @Date 2012. 6. 27. 오후 2:00:37
+## @Site 
+#################################################################
+
+license:
+    prefix: rp-
+    site: dev
+    extension: .cer            
+    path: C:/rp-license/
+    secretKey: GHv1dr2lIOd5FJ3TMEX/Rt3jIALmZXlrcoETfOnT3BMTho99MZvcn07q/KouLQOi4BzA5JGKyyOULE1yx5Z3WA==
+    
