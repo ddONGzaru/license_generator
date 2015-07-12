@@ -5,6 +5,8 @@ dependencies {
 
 	// spring framework
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     
     // apache commons
     compile('org.apache.commons:commons-lang3:3.3.2')
@@ -17,6 +19,8 @@ dependencies {
     compile('com.google.guava:guava:18.0')
 	compile("javax.servlet:jstl")
 	compile("org.jasypt:jasypt-spring31:1.9.0")
+	compile('org.jongo:jongo:1.2')
+	
 	
 	    
     // ___providedCompile___
