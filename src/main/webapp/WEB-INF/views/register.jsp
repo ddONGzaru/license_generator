@@ -39,7 +39,7 @@
 
 		<div class="inner-page">
 			<div class="logo">
-				<a href="index.html"><img src="resources/img/kingadmin-logo.png" alt="" /></a>
+				<a href="/"><img src="resources/img/kingadmin-logo.png" alt="" /></a>
 			</div>
 			<button type="button" class="btn btn-auth-facebook"><span>Connect using Facebook</span></button>
 

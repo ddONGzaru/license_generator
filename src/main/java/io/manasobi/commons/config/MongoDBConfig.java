@@ -32,4 +32,6 @@ public class MongoDBConfig {
     public MongoCollection users() {
         return jongo().getCollection("users");
     }
+    
+    
 }

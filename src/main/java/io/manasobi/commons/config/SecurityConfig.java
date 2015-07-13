@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeRequests()
 				.antMatchers("/","/login","/login/form**","/reg/**","/logout").permitAll()
-				.antMatchers("/1","/admin/**").hasRole("ADMIN")
+				.antMatchers("/12","/admin/**").hasRole("ADMIN")
 				//.anyRequest().authenticated()
 			.and()
 			.formLogin()
@@ -52,9 +52,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginProcessingUrl("/login") // 로그인 폼에서 ID, PW를 전송해야 하는 URL
 				.usernameParameter("username") // 로그인 폼에서 ID를 담는 Input name
 				.passwordParameter("password") // 로그인 폼에서 PW를 담는 Input name
-				.defaultSuccessUrl("/1")
+				.defaultSuccessUrl("/main")
 				.failureUrl("/")
-				.permitAll(); 
+				.permitAll()
+			.and()
+			.logout()
+				.logoutUrl("/app/logout") // 로그아웃을 처리할 가상 URL
+				.logoutSuccessUrl("/app/seeYouAgain")//
+				.permitAll();
 	}
 	
 	@Override
@@ -72,6 +77,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		registry.userDetailsService(mongoDBUserDetailsService);
 	}
 	
+	/*@Override
+	protected void configure(HttpSecurity http) throws Exception {
+	    http.authorizeRequests()
+	            .antMatchers("/", "/public/**").permitAll()
+	            .antMatchers("/users/**").hasAuthority("ADMIN")
+	            .anyRequest().fullyAuthenticated()
+	            .and()
+	            .formLogin()
+	            .loginPage("/login")
+	            .failureUrl("/login?error")
+	            .usernameParameter("email")
+	            .permitAll()
+	            .and()
+	            .logout()
+	            .logoutUrl("/logout")
+	            .deleteCookies("remember-me")
+	            .logoutSuccessUrl("/")
+	            .permitAll()
+	            .and()
+	            .rememberMe();
+	}*/
 	
 	/*@PostConstruct
 	public void init() {

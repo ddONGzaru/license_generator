@@ -11,7 +11,7 @@ public class LicenseController {
 	
 	
 	
-	@RequestMapping(value = {"/1", "/publish"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/main", "/publish"}, method = RequestMethod.GET)
 	public String publishLicense() {
 		return "main";
 	}

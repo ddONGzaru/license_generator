@@ -2,16 +2,21 @@ package io.manasobi.security;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.collect.Lists;
+import com.mongodb.MongoTimeoutException;
 
 import io.manasobi.commons.constant.Result;
 
@@ -59,4 +64,16 @@ public class UserDetailsController {
 		
 		return viewName;
 	}
+	
+	@ExceptionHandler(MongoTimeoutException.class)
+	public ModelAndView handleError(HttpServletRequest req, Exception exception) {
+
+		ModelAndView mav = new ModelAndView();
+	    
+		mav.addObject("msg", exception);
+	    mav.addObject("url", req.getRequestURL());
+	    mav.setViewName("error");
+	    
+	    return mav;
+	  }
 }
