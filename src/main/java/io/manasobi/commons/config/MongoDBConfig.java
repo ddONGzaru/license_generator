@@ -32,6 +32,11 @@ public class MongoDBConfig {
     public MongoCollection users() {
         return jongo().getCollection("users");
     }
+
+    @Bean
+    public MongoCollection licenseDetailsRepo() {
+    	return jongo().getCollection("licenseDetails");
+    }
     
     
 }

@@ -5,9 +5,13 @@ import io.manasobi.commons.config.AppArgsConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.config.ConfigFileApplicationListener;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 
 @SpringBootApplication
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+//@ImportResource("classpath:pdf-gateway-amqp.xml")
 public class AppRunner {
 
     public static void main(String[] args) {

@@ -24,7 +24,7 @@ public interface UserDetailsRepository {
 			return result.getN();
 			
 		}
-		
+
 	}
 	
 }

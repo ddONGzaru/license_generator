@@ -1,11 +1,14 @@
 package io.manasobi.security;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -26,6 +29,15 @@ public class UserDetailsController {
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
+	@PreAuthorize("hasRole('USER')")
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String main(Authentication auth, Principal principal) {
+		
+		
+		System.out.println(principal.getName());
+		
+		return "redirect:/license/publish";		
+	}
 	
 	@RequestMapping(value = "/reg/user", method = RequestMethod.GET)
 	public String register() {

@@ -18,7 +18,7 @@ public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry
-			.addResourceHandler("/license/resources/**", "/resources/**", "/reg/resources/**")			
+			.addResourceHandler("/license/resources/**", "/resources/**", "/reg/resources/**", "/license/publish/resources/**")			
 			.addResourceLocations("/resources/");
 	}
     

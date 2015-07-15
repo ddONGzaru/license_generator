@@ -15,8 +15,7 @@ import io.manasobi.security.MongoDBUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
-@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+//@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
@@ -44,11 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeRequests()
 				.antMatchers("/","/login","/login/form**","/reg/**","/logout").permitAll()
-				.antMatchers("/12","/admin/**").hasRole("ADMIN")
+				.antMatchers("/publish2","/admin/**").hasRole("ADMIN")
 				//.anyRequest().authenticated()
 			.and()
 			.formLogin()
-				.loginPage("/login.jsp") // 로그인 Form을 제공하는 페이지.
+				.loginPage("/login") // 로그인 Form을 제공하는 페이지.
 				.loginProcessingUrl("/login") // 로그인 폼에서 ID, PW를 전송해야 하는 URL
 				.usernameParameter("username") // 로그인 폼에서 ID를 담는 Input name
 				.passwordParameter("password") // 로그인 폼에서 PW를 담는 Input name

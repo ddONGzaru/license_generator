@@ -39,7 +39,7 @@ public interface UserDetailsService {
             
 			return client != null ? true : false;
 		}
-		
+
 	}
 	
 	

@@ -46,7 +46,7 @@
 				<div class="row">
 					<!-- logo -->
 					<div class="col-md-2 logo">
-						<a href="index.html"><img src="resources/img/manasobi6.png" alt="KingAdmin - Admin Dashboard" /></a>
+						<a href="index.html"><img src="resources/img/manasobi.png" alt="KingAdmin - Admin Dashboard" /></a>
 <!-- 						<a href="index.html"><img src="resources/img/kingadmin-logo-white.png" alt="KingAdmin - Admin Dashboard" /></a> -->
 						<h1 class="sr-only">KingAdmin Admin Dashboard</h1>
 					</div>
@@ -114,7 +114,12 @@
 									</a>									
 								</li>
 								<li><a href="typography.html"><i class="fa fa-font fa-fw"></i><span class="text">발급 이력<span class="badge element-bg-color-blue">status</span></span></a></li>
-								<li><a href="typography.html"><i class="fa fa-font fa-fw"></i><span class="text">라이센스 상세정보<span class="badge element-bg-color-blue">status</span></span></a></li>
+								<li>
+									<a href="/license/details">
+										<i class="fa fa-font fa-fw"></i>
+										<span class="text">라이센스 상세정보</span>
+									</a>
+								</li>
 								
 							</ul>
 						</nav>
@@ -185,13 +190,6 @@
 						<!-- end sidebar content -->
 					</div>
 					<!-- end left sidebar -->
-
-					<!-- top general alert -->
-					<div class="alert alert-danger top-general-alert">
-						<span>If you <strong>can't see the logo</strong> on the top left, please reset the style on right style switcher (for upgraded theme only).</span>
-						<button type="button" class="close">&times;</button>
-					</div>
-					<!-- end top general alert -->
 
 					<!-- content-wrapper -->
 					<div class="col-md-10 content-wrapper">
@@ -294,39 +292,68 @@
 									<div class="widget-content">
 										<div class="row">
 											<div class="col-md-6">
-												<form class="form-horizontal" role="form">
+												<form class="form-horizontal" role="form" id="licenseForm">
 													<div class="form-group">
-														<label for="123" class="col-sm-2 control-label" style="padding-top: 0px;">License Type</label>
+														<label class="col-sm-2 control-label" style="padding-top: 0px;">License Type</label>
 														<div class="col-sm-10">
 															<label class="control-inline fancy-radio" style="margin-right: 30px;">
-																<input type="radio" name="inline-radio">
+																<input type="radio" name="type" value="01" checked="checked">
 																<span><i></i>Production</span>
 															</label>
 															<label class="control-inline fancy-radio" style="margin-right: 30px;">
-																<input type="radio" name="inline-radio">
+																<input type="radio" name="type" value="02">
 																<span><i></i>Trial</span>
 															</label>
 															<label class="control-inline fancy-radio">
-																<input type="radio" name="inline-radio">
+																<input type="radio" name="type" value="03">
 																<span><i></i>Developer</span>
 															</label>
 														</div>	
 													</div>
 													<div class="form-group">
-														<label for="inputEmail3" class="col-sm-2 control-label">Site Name</label>
+														<label for="siteName" class="col-sm-2 control-label">Site Name</label>
 														<div class="col-sm-10">
-															<input type="text" class="form-control" id="inputEmail3">
+															<input type="text" class="form-control" id="siteName" name="siteName">
 														</div>
 													</div>
 													<div class="form-group">
-														<label for="inputPassword3" class="col-sm-2 control-label">Host Name</label>
+														<label for="hostName" class="col-sm-2 control-label">Host Name</label>
 														<div class="col-sm-10">
-															<input type="text" class="form-control" id="inputPassword3">
+															<input type="text" class="form-control" id="hostName" name="hostName">
 														</div>
+													</div>
+													<div class="form-group" id="expirationDateSelect">
+														<label for="siteName" class="col-sm-2 control-label" style="margin-top:5px;">유효기간</label>
+														<div class="col-sm-10" style="margin-top:10px;">
+															<label class="control-inline fancy-radio" style="margin-right: 20px;">
+																<input type="radio" name="expirationDays" value="7">
+																<span><i></i>7일</span>
+															</label>
+															<label class="control-inline fancy-radio" style="margin-right: 20px;">
+																<input type="radio" name="expirationDays" value="15">
+																<span><i></i>15일</span>
+															</label>
+															<label class="control-inline fancy-radio" style="margin-right: 20px;">
+																<input type="radio" name="expirationDays" checked="checked" value="30">
+																<span><i></i>30일</span>
+															</label>
+															<label class="control-inline fancy-radio" style="margin-right: 20px;">
+																<input type="radio" name="expirationDays" value="60">
+																<span><i></i>60일</span>
+															</label>
+															<label class="control-inline fancy-radio" style="margin-right: 20px;">
+																<input type="radio" name="expirationDays" value="90">
+																<span><i></i>90일</span>
+															</label>
+															<label class="control-inline fancy-radio" style="margin-right: 20px;">
+																<input type="radio" name="expirationDays" value="180">
+																<span><i></i>180일</span>
+															</label>
+														</div>	
 													</div>													
 													<div class="form-group">
 														<div class="col-sm-offset-9 col-sm-3">
-															<button type="submit" class="btn btn-default">라이센스 발급</button>
+															<input id="licenseSubmit" class="btn btn-default" type="submit" value="라이센스 발급">
 														</div>
 													</div>
 												</form>
@@ -370,6 +397,50 @@
 	<script src="resources/js/plugins/stat/flot/jquery.flot.tooltip.min.js"></script>
 	<script src="resources/js/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
 	<script src="resources/js/king-chart-stat.js"></script>
+	
+	<script type="text/javascript">
+    
+    var licneseType;
+    
+    $(function() {
+    	
+		licenseType = $(":input:radio[name=type]:checked").val();
+    	 
+		$("#expirationDateSelect").hide();
+		
+		$(":input:radio[name=type]").click(function() {
+			
+			licenseType = $(":input:radio[name=type]:checked").val();
+    		 
+			if (licenseType == "02") {
+				$("#expirationDateSelect").show();    			 
+			} else {
+				$("#expirationDateSelect").hide();
+			}
+		});
+		
+		$("#licenseSubmit").click(function() {
+			
+			if ($("#siteName").val() == '' || $("#siteName").val() == null) {
+				alert('site명을 입력해 주세요');
+				$("#siteName").focus();
+				return false;
+			}
+			
+			if ($("#hostName").val() == '' || $("#hostName").val() == null) {
+				alert('host명를 입력해 주세요');
+				$("#hostName").focus();
+				return false;
+			}
+			
+			$("#licenseForm")
+        		.attr({action:'publish', method:'post'})
+        		.submit();
+		});
+		
+     });
+    
+    </script>
 </body>
 
 </html>

@@ -46,7 +46,7 @@
 				<div class="row">
 					<!-- logo -->
 					<div class="col-md-2 logo">
-						<a href="index.html"><img src="resources/img/manasobi6.png" alt="KingAdmin - Admin Dashboard" /></a>
+						<a href="index.html"><img src="resources/img/manasobi.png" alt="KingAdmin - Admin Dashboard" /></a>
 <!-- 						<a href="index.html"><img src="resources/img/kingadmin-logo-white.png" alt="KingAdmin - Admin Dashboard" /></a> -->
 						<h1 class="sr-only">KingAdmin Admin Dashboard</h1>
 					</div>
@@ -108,13 +108,21 @@
 							<ul class="main-menu">
 								
 								<li><a href="#"></a></li>
-								<li class="active">
-									<a href="#">
+								<li>
+									<a href="/license/publish">
 										<i class="fa fa-dashboard fa-fw"></i><span class="text">라이센스 발급</span>										
 									</a>									
 								</li>
-								<li><a href="typography.html"><i class="fa fa-font fa-fw"></i><span class="text">발급 이력<span class="badge element-bg-color-blue">status</span></span></a></li>
-								<li><a href="typography.html"><i class="fa fa-font fa-fw"></i><span class="text">라이센스 상세정보<span class="badge element-bg-color-blue">status</span></span></a></li>
+								<li>
+									<a href="typography.html">
+										<i class="fa fa-font fa-fw"></i><span class="text">발급 이력</span>
+									</a>
+								</li>
+								<li class="active">
+									<a href="/license/details">
+										<i class="fa fa-font fa-fw"></i><span class="text">라이센스 상세정보</span>
+									</a>
+								</li>
 								
 							</ul>
 						</nav>
@@ -186,13 +194,6 @@
 					</div>
 					<!-- end left sidebar -->
 
-					<!-- top general alert -->
-					<div class="alert alert-danger top-general-alert">
-						<span>If you <strong>can't see the logo</strong> on the top left, please reset the style on right style switcher (for upgraded theme only).</span>
-						<button type="button" class="close">&times;</button>
-					</div>
-					<!-- end top general alert -->
-
 					<!-- content-wrapper -->
 					<div class="col-md-10 content-wrapper">
 						<div class="row">
@@ -240,93 +241,22 @@
 								<em>라이센스를 발급하는 화면입니다.</em>
 							</div> -->
 							<div class="main-content">
-								<div class="row">
-									<div class="col-md-12">
-										<!-- WIDGET ACTIVITY FEED -->
-										<div class="widget widget-scrolling" style="height: 347px;">
-											<div class="widget-header">
-												<h3><i class="fa fa-lightbulb-o"></i> Tips</h3>												
-											</div>
-											<div class="widget-content">
-												<ul class="list-unstyled activity-list">
-													<li>
-														<i class="fa fa-info activity-icon pull-left icon-success"></i>
-														<p>
-															<span class="text-primary">Site Name</span>은 라이센스 파일 다운로드시, 파일명이 됩니다.
-															<span class="timestamp text-primary">예) Site Name -> manasobi 다운로드 파일명 -> manasobi.cer</span>
-														</p>
-													</li>
-													<li>
-														<i class="fa fa-info activity-icon pull-left icon-primary"></i>
-														<p style="margin-top: 9px;">
-															<span class="text-primary">Host Name</span>은 cmd창에서 'hostname'을 입력하면 확인 가능합니다.
-														</p>
-													</li>
-													<li>
-														<i class="fa fa-info activity-icon pull-left icon-success"></i>
-														<p style="margin-top: 9px;">
-															<span class="text-primary">Production</span> 라이센스는 정식 제품 라이센스로 hostname을 인증 기준으로 합니다.
-														</p>
-													</li>
-													<li>
-														<i class="fa fa-info activity-icon pull-left icon-primary"></i>
-														<p style="margin-top: 9px;">
-															<span class="text-primary">Trial</span> 라이센스는 사용일자 경과 후에는 사용할 수 없습니다.
-														</p>
-													</li>
-													<li>
-														<i class="fa fa-info activity-icon pull-left icon-success"></i>
-														<p style="margin-top: 9px;">
-															<span class="text-primary">Developer</span> 라이센스는 개발자용으로 hostname, 사용일자 등과 상관없는 무제한 라이센스입니다.
-														</p>
-													</li>
-												</ul>
-											</div>
-										</div>
-										<!-- END WIDGET ACTIVITY FEED -->
-									</div>
-								</div>
 								<!-- HORIZONTAL FORM -->
 								<div class="widget">
 									<div class="widget-header">
-										<h3><i class="fa fa-edit"></i> Horizontal Form</h3>
+										<h3><i class="fa fa-edit"></i> License Details Search</h3>
 									</div>
 									<div class="widget-content">
 										<div class="row">
 											<div class="col-md-6">
-												<form class="form-horizontal" role="form">
+												<form class="form-horizontal" role="form" id="licenseForm">
 													<div class="form-group">
-														<label for="123" class="col-sm-2 control-label" style="padding-top: 0px;">License Type</label>
-														<div class="col-sm-10">
-															<label class="control-inline fancy-radio" style="margin-right: 30px;">
-																<input type="radio" name="inline-radio">
-																<span><i></i>Production</span>
-															</label>
-															<label class="control-inline fancy-radio" style="margin-right: 30px;">
-																<input type="radio" name="inline-radio">
-																<span><i></i>Trial</span>
-															</label>
-															<label class="control-inline fancy-radio">
-																<input type="radio" name="inline-radio">
-																<span><i></i>Developer</span>
-															</label>
-														</div>	
-													</div>
-													<div class="form-group">
-														<label for="inputEmail3" class="col-sm-2 control-label">Site Name</label>
-														<div class="col-sm-10">
-															<input type="text" class="form-control" id="inputEmail3">
+														<label for="siteName" class="col-sm-3 control-label">라이센스 발급 키</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="siteName" name="siteName" value="${license.id}">
 														</div>
-													</div>
-													<div class="form-group">
-														<label for="inputPassword3" class="col-sm-2 control-label">Host Name</label>
-														<div class="col-sm-10">
-															<input type="text" class="form-control" id="inputPassword3">
-														</div>
-													</div>													
-													<div class="form-group">
-														<div class="col-sm-offset-9 col-sm-3">
-															<button type="submit" class="btn btn-default">라이센스 발급</button>
+														<div class="col-sm-2">
+															<input id="licenseSubmit" class="btn btn-default" type="submit" value="조회">
 														</div>
 													</div>
 												</form>
@@ -335,6 +265,56 @@
 									</div>
 								</div>
 								<!-- END HORIZONTAL FORM -->
+								<div class="row">
+									<div class="col-sm-6 col-print-6 left-col">
+										<blockquote class="invoice-notes">
+											<strong>라이센스 타입</strong>
+											<p>&nbsp;${license.type}</p>
+										</blockquote>
+									</div>
+									<div class="col-sm-6 col-print-6 left-col">
+										<blockquote class="invoice-notes">
+											<strong>Site Name</strong>
+											<p>&nbsp;${license.siteName}</p>
+										</blockquote>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6 col-print-6 left-col">
+										<blockquote class="invoice-notes">
+											<strong>Host Name</strong>
+											<p>&nbsp;${license.hostName}</p>
+										</blockquote>
+									</div>
+									<div class="col-sm-6 col-print-6 left-col">
+										<blockquote class="invoice-notes">
+											<strong>발급일자</strong>
+											<p>&nbsp;${createdDate}</p>
+										</blockquote>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6 col-print-6 left-col">
+										<blockquote class="invoice-notes">
+											<strong>유효기간</strong>
+											<p>&nbsp;${license.expirationDate}</p>
+										</blockquote>
+									</div>
+									<div class="col-sm-6 col-print-6 left-col">
+										<a class="btn btn-lg btn-primary" href="#">
+											<i class="fa fa-download fa-2x pull-left"></i> Download&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /><small>License File</small>
+										</a>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-3 col-md-offset-6">
+										<div class="contextual-summary-info contextual-background green-bg" style="cursor: pointer;">
+											<i class="fa fa-download"></i>
+											<p class="pull-right"><span>Download</span> License File</p>
+										</div>
+									</div>									
+								</div>
+								
 							</div>
 							<!-- /main-content -->
 						</div>
@@ -370,6 +350,50 @@
 	<script src="resources/js/plugins/stat/flot/jquery.flot.tooltip.min.js"></script>
 	<script src="resources/js/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
 	<script src="resources/js/king-chart-stat.js"></script>
+	
+	<script type="text/javascript">
+    
+    var licneseType;
+    
+    $(function() {
+    	
+		licenseType = $(":input:radio[name=type]:checked").val();
+    	 
+		$("#expirationDateSelect").hide();
+		
+		$(":input:radio[name=type]").click(function() {
+			
+			licenseType = $(":input:radio[name=type]:checked").val();
+    		 
+			if (licenseType == "02") {
+				$("#expirationDateSelect").show();    			 
+			} else {
+				$("#expirationDateSelect").hide();
+			}
+		});
+		
+		$("#licenseSubmit").click(function() {
+			
+			if ($("#siteName").val() == '' || $("#siteName").val() == null) {
+				alert('site명을 입력해 주세요');
+				$("#siteName").focus();
+				return false;
+			}
+			
+			if ($("#hostName").val() == '' || $("#hostName").val() == null) {
+				alert('host명를 입력해 주세요');
+				$("#hostName").focus();
+				return false;
+			}
+			
+			$("#licenseForm")
+        		.attr({action:'publish', method:'post'})
+        		.submit();
+		});
+		
+     });
+    
+    </script>
 </body>
 
 </html>

@@ -3,10 +3,11 @@ dependencies {
 
 	// ___compile___
 
-	// spring framework
+	// spring boot
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-security")
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+    compile("org.springframework.boot:spring-boot-starter-amqp")
     
     // apache commons
     compile('org.apache.commons:commons-lang3:3.3.2')

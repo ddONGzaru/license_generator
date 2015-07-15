@@ -51,7 +51,7 @@
 						<div class="col-sm-12">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user"></i></span>
-								<input type="text" placeholder="username" id="username" name="username" class="form-control">
+								<input type="text" placeholder="username" id="username" name="username" class="form-control" value="test@1">
 							</div>
 						</div>
 					</div>
@@ -60,7 +60,7 @@
 						<div class="col-sm-12">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-								<input type="password" placeholder="password" id="password" name="password" class="form-control">
+								<input type="password" placeholder="password" id="password" name="password" class="form-control" value="test">
 							</div>
 						</div>
 					</div>
