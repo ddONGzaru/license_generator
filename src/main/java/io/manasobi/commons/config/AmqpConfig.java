@@ -7,25 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-//@EnableRabbit
 public class AmqpConfig {
-
-	/*@Bean
-    public SimpleMessageListenerContainer messageListenerContainer() {
-		
-        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-        
-        container.setConnectionFactory(rabbitConnectionFactory());
-        container.setQueueNames("manasobi");        
-        
-        return container;
-    }*/
-	/*@Bean
-    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory() {
-        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
-        factory.setConnectionFactory(rabbitConnectionFactory());
-        return factory;
-    }*/
 
 	@Bean
 	public ConnectionFactory rabbitConnectionFactory() {
@@ -36,8 +18,6 @@ public class AmqpConfig {
         connectionFactory.setVirtualHost("manasobi-host");
         connectionFactory.setUsername("manasobi");
         connectionFactory.setPassword("manasobi");
-        
-        
         
         return connectionFactory;
     }
@@ -58,8 +38,4 @@ public class AmqpConfig {
 		return rabbitTemplate;
 	}
 	
-	/*@RabbitListener(queues = "manasobi")
-    public void capitalize(License license) {
-        System.out.println(license);
-    }*/
 }

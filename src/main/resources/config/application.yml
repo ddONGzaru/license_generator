@@ -6,6 +6,9 @@ spring:
 
 server.port: 80
 
+spring.dao.exceptiontranslation.enabled: false
+
+
 logging.level: 
     io.recruit: INFO
     org.springframework: INFO
@@ -18,4 +21,6 @@ logging.config: classpath:config/logback.xml
 ---
 spring.profiles: real
 
-logging.config: file:d:/config/logback3.xml            
+logging.config: file:d:/config/logback3.xml
+
+            

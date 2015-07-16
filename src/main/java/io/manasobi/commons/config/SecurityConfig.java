@@ -1,11 +1,8 @@
 package io.manasobi.commons.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -52,13 +49,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.usernameParameter("username") // 로그인 폼에서 ID를 담는 Input name
 				.passwordParameter("password") // 로그인 폼에서 PW를 담는 Input name
 				.defaultSuccessUrl("/main")
-				.failureUrl("/")
-				.permitAll()
+				.failureUrl("/login?error2")
+				.permitAll()				
 			.and()
 			.logout()
 				.logoutUrl("/app/logout") // 로그아웃을 처리할 가상 URL
 				.logoutSuccessUrl("/app/seeYouAgain")//
-				.permitAll();
+				.permitAll()
+			.and()
+			.exceptionHandling()
+				.accessDeniedPage("/error/403");
 	}
 	
 	@Override

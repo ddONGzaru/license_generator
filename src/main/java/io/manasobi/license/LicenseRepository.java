@@ -13,7 +13,7 @@ public interface LicenseRepository {
 
 	Result save(LicenseDetails licenseDetails);
 	
-	LicenseDetails findLicenseDetails(String licenseKey);
+	LicenseDetails findLicenseDetails(String genKey);
 	
 	@Repository("licenseRepository")
 	public class LicenseRepositoryImpl implements LicenseRepository {
@@ -37,9 +37,9 @@ public interface LicenseRepository {
 		}
 
 		@Override
-		public LicenseDetails findLicenseDetails(String id) {
+		public LicenseDetails findLicenseDetails(String genKey) {
 			
-			LicenseDetails licenseDetails = licenseDetailsRepo.findOne("{#: #}", "id", id).as(LicenseDetails.class);
+			LicenseDetails licenseDetails = licenseDetailsRepo.findOne("{#: #}", "genKey", genKey).as(LicenseDetails.class);
 	            
             if (licenseDetails == null) {
                 throw new InternalAuthenticationServiceException("존재하지 않는 사용자입니다.");

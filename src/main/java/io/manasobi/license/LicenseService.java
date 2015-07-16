@@ -3,16 +3,21 @@ package io.manasobi.license;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.epapyrus.sdp.commons.utils.DateUtils;
 
 import io.manasobi.commons.constant.Result;
+import io.manasobi.license.pager.PagerRepository;
 
 public interface LicenseService {
 
@@ -22,6 +27,7 @@ public interface LicenseService {
 	
 	LicenseDetails findLiceseDetails(String licenseKey);
 	
+	Page<LicenseDetails> findAllLiceseDetails(Pageable pageable);
 	
 	@Service("licenseService")
 	public class LicenseServiceImpl implements LicenseService {
@@ -30,7 +36,10 @@ public interface LicenseService {
 		private RabbitTemplate rabbitTemplate;
 		
 		@Autowired
-		private LicenseRepository licenseRepository;
+		private LicenseRepository licenseRepo;
+		
+		@Resource
+		private PagerRepository pagerRepo;
 		
 		@Override
 		public Result sendJobTicket(License license) {
@@ -73,7 +82,7 @@ public interface LicenseService {
 		}	
 		
 		private String generateLicenseID() {
-			return UUID.randomUUID().toString();
+			return StringUtils.upperCase(UUID.randomUUID().toString());
 		}
 		
 		private String generatoeExpirationDate(int expirationDays) {
@@ -91,7 +100,7 @@ public interface LicenseService {
 			
 			LicenseDetails licenseDetails = buildLicenseDetails(userName, license);
 			
-			return licenseRepository.save(licenseDetails);
+			return licenseRepo.save(licenseDetails);
 		}
 
 		private LicenseDetails buildLicenseDetails(String userName, License license) {
@@ -100,7 +109,7 @@ public interface LicenseService {
 			
 			LicenseDetails licenseDetails = new LicenseDetails();
 			
-			licenseDetails.setId(license.getId());
+			licenseDetails.setGenKey(license.getId());
 			licenseDetails.setUserName(userName);
 			licenseDetails.setLicense(license);
 			licenseDetails.setCreatedDate(createdDate);			
@@ -111,7 +120,13 @@ public interface LicenseService {
 		@Override
 		public LicenseDetails findLiceseDetails(String licenseKey) {
 			
-			return licenseRepository.findLicenseDetails(licenseKey);
+			return licenseRepo.findLicenseDetails(licenseKey);
+		}
+
+		@Override
+		public Page<LicenseDetails> findAllLiceseDetails(Pageable pageable) {
+			
+			return pagerRepo.findAll(pageable);
 		}
 		
 	}

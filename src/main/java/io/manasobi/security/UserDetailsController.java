@@ -36,7 +36,9 @@ public class UserDetailsController {
 		
 		System.out.println(principal.getName());
 		
-		return "redirect:/license/publish";		
+		//return "redirect:/license/history";		
+		
+		return "license/history";		
 	}
 	
 	@RequestMapping(value = "/reg/user", method = RequestMethod.GET)
