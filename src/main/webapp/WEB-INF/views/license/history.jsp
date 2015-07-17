@@ -10,7 +10,7 @@
 <!--<![endif]-->
 
 <head>
-	<title>Dashboard | KingAdmin - Admin Dashboard</title>
+	<title>MANASOBI</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -36,165 +36,25 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="resources/ico/kingadmin-favicon72x72.png">
 	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="resources/ico/kingadmin-favicon57x57.png">
 	<link rel="shortcut icon" href="resources/ico/favicon.png">
+	
+	<style>
+  		th, td { text-align: center; }
+	</style>
 </head>
 
 <body class="dashboard2">
 	<!-- WRAPPER -->
 	<div class="wrapper">
-		<!-- TOP BAR -->
-		<div class="top-bar">
-			<div class="container">
-				<div class="row">
-					<!-- logo -->
-					<div class="col-md-2 logo">
-						<a href="index.html"><img src="resources/img/manasobi.png" alt="KingAdmin - Admin Dashboard" /></a>
-<!-- 						<a href="index.html"><img src="resources/img/kingadmin-logo-white.png" alt="KingAdmin - Admin Dashboard" /></a> -->
-						<h1 class="sr-only">KingAdmin Admin Dashboard</h1>
-					</div>
-					<!-- end logo -->
-					<div class="col-md-10">
-						<div class="row">
-							<div class="col-md-3">
-							</div>
-							<div class="col-md-9">
-								<div class="top-bar-right">
-									<!-- responsive menu bar icon -->
-									<a href="#" class="hidden-md hidden-lg main-nav-toggle"><i class="fa fa-bars"></i></a>
-									<!-- end responsive menu bar icon -->
-											
-									<!-- logged user and the menu -->
-									<div class="logged-user">
-										<div class="btn-group">
-											<a href="#" class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-												<img src="resources/img/user-avatar.png" alt="User Avatar" />
-												<span class="name">Stacy Rose</span> <span class="caret"></span>
-											</a>
-											<ul class="dropdown-menu" role="menu">												
-												<li>
-													<a href="#">
-														<i class="fa fa-cog"></i>
-														<span class="text">Settings</span>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-power-off"></i>
-														<span class="text">Logout</span>
-													</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<!-- end logged user and the menu -->
-								</div>
-								<!-- /top-bar-right -->
-							</div>
-						</div>
-						<!-- /row -->
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /top -->
+		
+		<%@include file="../bar-top.jsp"%>
+		
 		<!-- BOTTOM: LEFT NAV AND RIGHT MAIN CONTENT -->
 		<div class="bottom">
 			<div class="container">
 				<div class="row">
-					<!-- left sidebar -->
-					<div class="col-md-2 left-sidebar">
-						<!-- main-nav -->
-						<nav class="main-nav">
-							<ul class="main-menu">
-								
-								<li><a href="#"></a></li>
-								<li>
-									<a href="/license/publish">
-										<i class="fa fa-dashboard fa-fw"></i><span class="text">라이센스 발급</span>										
-									</a>									
-								</li>
-								<li>
-									<a href="/license/history">
-										<i class="fa fa-font fa-fw"></i><span class="text">발급 이력</span>
-									</a>
-								</li>
-								<li class="active">
-									<a href="#">
-										<i class="fa fa-font fa-fw"></i><span class="text">라이센스 상세정보</span>
-									</a>
-								</li>
-								
-							</ul>
-						</nav>
-						<!-- /main-nav -->
-						<div class="sidebar-minified js-toggle-minified">
-							<i class="fa fa-angle-left"></i>
-						</div>
-						<!-- sidebar content -->
-						<div class="sidebar-content">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h5><i class="fa fa-lightbulb-o"></i> Tips</h5>
-								</div>
-								<div class="panel-body">
-									<p>You can do live search to the widget at search box located at top bar. It's very useful if your dashboard is full of widget.</p>
-								</div>
-							</div>
-							<h5 class="label label-default"><i class="fa fa-info-circle"></i> Server Info</h5>
-							<ul class="list-unstyled list-info-sidebar bottom-30px">
-								<li class="data-row">
-									<div class="data-name">Disk Space Usage</div>
-									<div class="data-value">
-										274.43 / 2 GB
-										<div class="progress progress-xs">
-											<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
-												<span class="sr-only">10%</span>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="data-row">
-									<div class="data-name">Monthly Bandwidth Transfer</div>
-									<div class="data-value">
-										230 / 500 GB
-										<div class="progress progress-xs">
-											<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="46" aria-valuemin="0" aria-valuemax="100" style="width: 46%">
-												<span class="sr-only">46%</span>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="data-row">
-									<span class="data-name">Database Disk Space</span>
-									<span class="data-value">219.45 MB</span>
-								</li>
-								<li class="data-row">
-									<span class="data-name">Operating System</span>
-									<span class="data-value">Linux</span>
-								</li>
-								<li class="data-row">
-									<span class="data-name">Apache Version</span>
-									<span class="data-value">2.4.6</span>
-								</li>
-								<li class="data-row">
-									<span class="data-name">PHP Version</span>
-									<span class="data-value">5.3.27</span>
-								</li>
-								<li class="data-row">
-									<span class="data-name">MySQL Version</span>
-									<span class="data-value">5.5.34-cll</span>
-								</li>
-								<li class="data-row">
-									<span class="data-name">Architecture</span>
-									<span class="data-value">x86_64</span>
-								</li>
-							</ul>
-						</div>
-						<!-- end sidebar content -->
-					</div>
-					<!-- end left sidebar -->
-
+				
+					<%@include file="../bar-side.jsp"%>
+					
 					<!-- content-wrapper -->
 					<div class="col-md-10 content-wrapper">
 						<div class="row">
@@ -207,29 +67,11 @@
 							<div class="col-lg-8 ">
 								<div class="top-content">
 									<ul class="list-inline quick-access">
-										<!-- <li>
-											<a href="charts-statistics-interactive.html">
-												<div class="quick-access-item bg-color-green">
-													<i class="fa fa-bar-chart-o"></i>
-													<h5>CHARTS</h5><em>basic, interactive, real-time</em>
-												</div>
-											</a>
-										</li>
 										<li>
-											<a href="page-inbox.html">
-												<div class="quick-access-item bg-color-blue">
-													<i class="fa fa-envelope"></i>
-													<h5>INBOX</h5><em>inbox with gmail style</em>
-												</div>
-											</a>
-										</li> -->
-										<li>
-											<a href="tables-dynamic-table.html">
-												<div class="quick-access-item bg-color-orange">
-													<i class="fa fa-table"></i>
-													<h5>Application Info</h5><em>ver.1.0.0</em>
-												</div>
-											</a>
+											<div class="quick-access-item bg-color-blue">
+												<i class="fa fa-table"></i>
+												<h5>Application Info</h5><em>ver.1.0.0</em>
+											</div>
 										</li>
 									</ul>
 								</div>
@@ -237,12 +79,7 @@
 						</div>
 						<!-- main -->
 						<div class="content">
-							<!-- <div class="main-header">
-								<h2>라이센스 발급</h2>
-								<em>라이센스를 발급하는 화면입니다.</em>
-							</div> -->
 							<div class="main-content">
-								
 								<!-- SHOW HIDE COLUMNS DATA TABLE -->
 								<div class="widget widget-table">
 									<div class="widget-header">
@@ -261,14 +98,14 @@
 										<table id="datatable-column-interactive" class="table table-sorting table-hover table-bordered datatable">
 											<thead>
 												<tr>
-													<th>NO</th>
-													<th>발급 키</th>
+													<th width="70px;">NO</th>
+													<th width="300px">발급 키</th>
 													<th>사이트</th>
 													<th>호스트네임</th>
-													<th>타입</th>
-													<th>유효기간</th>
-													<th>발급일자</th>
-													<th>발급완료</th>
+													<th width="100px;">타입</th>
+													<th width="190px;">유효기간</th>
+													<th width="190px;">발급일자</th>
+													<th width="100px;">발급완료</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -276,25 +113,16 @@
 										            <tr>
 										            	<%-- <th>${endIndex - status.count}</th> --%>
 										            	<%-- <th>${status.count}</th> --%>
-										            	<th>${totalRecordCount - (((currentIndex - 1) * recordCountPerPage) + status.index)}</th>
-										            	<th>${details.genKey}</th>
-										            	<th>${details.license.siteName}</th>
-										            	<th>${details.license.hostName}</th>
-										            	<th>${details.license.type}</th>
-										            	<th>${details.license.expirationDate}</th>
-										            	<th>${details.createdDateStr}</th>
-										            	<th>${details.generated}</th>										            	
+										            	<td>${totalRecordCount - (((currentIndex - 1) * recordCountPerPage) + status.index)}</td>
+										            	<td>${details.genKey}</td>
+										            	<td>${details.license.siteName}</td>
+										            	<td>${details.license.hostName}</td>
+										            	<td>${details.license.type}</td>
+										            	<td>${details.license.expirationDate}</td>
+										            	<td>${details.createdDateStr}</td>
+										            	<td>${details.generated}</td>										            	
 										            </tr>	
 										        </c:forEach>
-												<%-- <c:forEach items="${info}" var="licenseDetails">										            
-										            <tr>
-										            	<th>${licenseDetails.id}</th>
-										            	<th>${licenseDetails.id}</th>
-										            	<th>${licenseDetails.license.siteName}</th>
-										            	<th>${licenseDetails.id}</th>
-										            	<th>${licenseDetails.id}</th>
-										            </tr>	
-										        </c:forEach> --%>										        
 											</tbody>
 										</table>
 									</div>
@@ -374,50 +202,6 @@
 	<script src="resources/js/plugins/stat/flot/jquery.flot.tooltip.min.js"></script>
 	<script src="resources/js/plugins/bootstrap-multiselect/bootstrap-multiselect.js"></script>
 	<script src="resources/js/king-page.js"></script>
-	
-	<script type="text/javascript">
-    
-    var licneseType;
-    
-    $(function() {
-    	
-		licenseType = $(":input:radio[name=type]:checked").val();
-    	 
-		$("#expirationDateSelect").hide();
-		
-		$(":input:radio[name=type]").click(function() {
-			
-			licenseType = $(":input:radio[name=type]:checked").val();
-    		 
-			if (licenseType == "02") {
-				$("#expirationDateSelect").show();    			 
-			} else {
-				$("#expirationDateSelect").hide();
-			}
-		});
-		
-		$("#licenseSubmit").click(function() {
-			
-			if ($("#siteName").val() == '' || $("#siteName").val() == null) {
-				alert('site명을 입력해 주세요');
-				$("#siteName").focus();
-				return false;
-			}
-			
-			if ($("#hostName").val() == '' || $("#hostName").val() == null) {
-				alert('host명를 입력해 주세요');
-				$("#hostName").focus();
-				return false;
-			}
-			
-			$("#licenseForm")
-        		.attr({action:'publish', method:'post'})
-        		.submit();
-		});
-		
-     });
-    
-    </script>
 </body>
 
 </html>

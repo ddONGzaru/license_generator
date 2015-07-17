@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <!--[if IE 9 ]><html class="ie ie9" lang="en" class="no-js"> <![endif]-->
 <!--[if !(IE)]><!-->
@@ -36,12 +38,11 @@
 		<div class="inner-page">
 			<h1>
 				<span class="clearfix title">
-					<span class="number">${exception.message}404</span> <span class="text">Oops! <br/>Page Not Found</span>
+					<span class="number">500</span> <span class="text" style="font-size: 1em; top: 32px;">Oops! <br/>INTERNAL SERVER ERROR</span>
 				</span>
 			</h1>
 
-			<p>The page you were looking for could not be found, please <a href="#">contact us</a> to report this issue.</p>
-			<p>You can also use search form below to find the page you are looking for.</p>
+			<p style="font-size: 1.5em;">${errMsg}</p>
 			
 			<div>
 				<a href="/" class="btn btn-primary"><i class="fa fa-home"></i> Home</a>

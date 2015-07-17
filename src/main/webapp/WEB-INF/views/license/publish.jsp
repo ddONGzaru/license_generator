@@ -9,7 +9,7 @@
 <!--<![endif]-->
 
 <head>
-	<title>Dashboard | KingAdmin - Admin Dashboard</title>
+	<title>MANASOBI</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -113,7 +113,9 @@
 										<i class="fa fa-dashboard fa-fw"></i><span class="text">라이센스 발급</span>										
 									</a>									
 								</li>
-								<li><a href="typography.html"><i class="fa fa-font fa-fw"></i><span class="text">발급 이력<span class="badge element-bg-color-blue">status</span></span></a></li>
+								<li>
+									<a href="/license/history">
+										<i class="fa fa-font fa-fw"></i><span class="text">발급 이력</span></a></li>
 								<li>
 									<a href="/license/details">
 										<i class="fa fa-font fa-fw"></i>

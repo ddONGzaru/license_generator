@@ -114,7 +114,7 @@
 									</a>									
 								</li>
 								<li>
-									<a href="typography.html">
+									<a href="/licens/history">
 										<i class="fa fa-font fa-fw"></i><span class="text">발급 이력</span>
 									</a>
 								</li>

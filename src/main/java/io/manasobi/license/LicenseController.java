@@ -104,7 +104,9 @@ public class LicenseController {
 		simpleDate = StringUtils.replace(simpleDate, "T", " ");
 		simpleDate = StringUtils.remove(simpleDate, "Z");
 		
-		return simpleDate;
+		
+		
+		return StringUtils.substring(simpleDate, 0, 19);
 	}
 
 	@RequestMapping(value = "/license/history", method = RequestMethod.GET)

@@ -5,7 +5,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,7 +17,8 @@ public class GlobalExceptionController {
  
 		ModelAndView model = new ModelAndView("error");
 		model.addObject("errMsg", e.getMessage());
- 
+		model.setViewName("error");
+		
 		return model;
  
 	}

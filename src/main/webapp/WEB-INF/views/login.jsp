@@ -38,7 +38,7 @@
 	<div class="wrapper full-page-wrapper page-auth page-login text-center">
 		<div class="inner-page">
 			<div class="logo">
-				<a href="index.html"><img src="resources/img/kingadmin-logo.png" alt="" /></a>
+				<a href="index.html"><img src="resources/img/manasobi2.png" alt="" /></a>
 			</div>
 			<button type="button" class="btn btn-auth-facebook"><span>Login via Facebook</span></button>
 

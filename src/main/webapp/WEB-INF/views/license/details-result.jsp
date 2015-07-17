@@ -114,12 +114,12 @@
 									</a>									
 								</li>
 								<li>
-									<a href="typography.html">
+									<a href="/license/history">
 										<i class="fa fa-font fa-fw"></i><span class="text">발급 이력</span>
 									</a>
 								</li>
 								<li class="active">
-									<a href="/license/details">
+									<a href="#">
 										<i class="fa fa-font fa-fw"></i><span class="text">라이센스 상세정보</span>
 									</a>
 								</li>
