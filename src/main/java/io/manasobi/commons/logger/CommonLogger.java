@@ -10,12 +10,39 @@ public final class CommonLogger {
 	
 	private CommonLogger() { }
 	
-	private static Logger logger = LoggerFactory.getLogger("io.manasobi");
+	private static Logger logger = LoggerFactory.getLogger("manasobi");
+	
+	public static void debug(String msg, Class clazz) {
+		
+		if (logger.isDebugEnabled()) {
+			logger.debug(parseLogPrifix(clazz) + msg);			
+		}
+	}
+	
+	public static void info(String msg, Class clazz) {
+		if (logger.isInfoEnabled()) {
+			logger.info(parseLogPrifix(clazz) + msg);			
+		}
+	}
+	
+	public static void warn(String msg, Class clazz) {
+		
+		if (logger.isWarnEnabled()) {
+			logger.warn(parseLogPrifix(clazz) + msg);			
+		}
+	}
 	
 	public static void error(String msg, Class clazz) {
 		
 		if (logger.isErrorEnabled()) {
-			logger.error(parseLogPrifix(clazz) + "::: ERROR ::: " + msg);
+			logger.error(parseLogPrifix(clazz) + msg);
+		}
+	}
+
+	public static void trace(String msg, Class clazz) {
+		
+		if (logger.isTraceEnabled()) {
+			logger.trace(parseLogPrifix(clazz) + msg);			
 		}
 	}
 

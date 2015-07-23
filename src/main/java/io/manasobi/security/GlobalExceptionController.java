@@ -17,7 +17,8 @@ public class GlobalExceptionController {
  
 		ModelAndView model = new ModelAndView("error");
 		model.addObject("errMsg", e.getMessage());
-		model.setViewName("error");
+		
+		System.out.println(e.getMessage());
 		
 		return model;
  

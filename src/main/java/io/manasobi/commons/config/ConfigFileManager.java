@@ -10,7 +10,7 @@ import java.util.Map;
  * @author lab
  *
  */
-public class AppArgsConfig {
+public class ConfigFileManager {
 
 	private Map<String, String> argsConfigMap = new HashMap<String, String>();
 	
@@ -19,8 +19,12 @@ public class AppArgsConfig {
 		"license"
 	};
 	
+	public ConfigFileManager(String... args) {
+		
+		build(args);
+	}
 	
-	public AppArgsConfig(String... args) {
+	public void init(String... args) {
 		
 		build(args);
 	}

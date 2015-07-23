@@ -22,7 +22,7 @@
 	</appender>
 
 	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    	<file>${LOG_FILE_DIR}/pg8-app.log</file>
+    	<file>${LOG_FILE_DIR}/manasobi.log</file>
     	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>${LOG_FILE_DIR}/pg8-app.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
 			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -36,12 +36,17 @@
     	</encoder>
   	</appender>
 
-	<logger name="io.recruit" additivity="false" level="info">
+	<logger name="io.manasobi" additivity="false" level="info">
     	<appender-ref ref="console"/>
     	<appender-ref ref="file"/>
 	</logger>
 	
 	<logger name="org.springframework" additivity="false" level="INFO">
+		<appender-ref ref="console"/>
+    	<appender-ref ref="file"/>
+	</logger>
+
+	<logger name="org.jongo" additivity="false" level="INFO">
 		<appender-ref ref="console"/>
     	<appender-ref ref="file"/>
 	</logger>

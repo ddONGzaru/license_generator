@@ -1,12 +1,16 @@
 package io.manasobi.commons.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 import io.manasobi.security.MongoDBUserDetailsService;
 
@@ -21,15 +25,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(mongoDBUserDetailsService);
+		auth.authenticationProvider(authenticationProvider());
     }
 	
+	@Bean
+	public DaoAuthenticationProvider authenticationProvider() {
+		
+		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        
+        provider.setPasswordEncoder(passwordEncoder());
+        provider.setUserDetailsService(mongoDBUserDetailsService);
+        
+        return provider;
+	}
+	
+	@Bean
+	public PasswordEncoder passwordEncoder(){
+		PasswordEncoder encoder = new StandardPasswordEncoder();
+		return encoder;
+	}
 	
 	@Override 
 	public void configure(WebSecurity web) throws Exception { 
+		
 		web
 			.ignoring()
-			.antMatchers("/resources/**"); 
+			.antMatchers("/resources/**");
+			
 	} // 리소스에 대해서는 처리하니 않는다.
 	
 	
@@ -49,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.usernameParameter("username") // 로그인 폼에서 ID를 담는 Input name
 				.passwordParameter("password") // 로그인 폼에서 PW를 담는 Input name
 				.defaultSuccessUrl("/main")
-				.failureUrl("/login?error2")
+				.failureUrl("/")
 				.permitAll()				
 			.and()
 			.logout()
@@ -61,20 +83,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.accessDeniedPage("/error/403");
 	}
 	
-	@Override
+	/*@Override
 	public void configure(AuthenticationManagerBuilder registry) throws Exception { 
 		
-		/*registry
+		registry
 			.inMemoryAuthentication()
 				.withUser("siva").password("siva").roles("USER")
 				.and()
-				.withUser("admin").password("admin").roles("ADMIN","USER");*/
+				.withUser("admin").password("admin").roles("ADMIN","USER");
 		
-		/*registry.jdbcAuthentication().dataSource(dataSource); 
-		registry.userDetailsService(customUserDetailsService);*/
+		registry.jdbcAuthentication().dataSource(dataSource); 
+		registry.userDetailsService(customUserDetailsService);
 		
 		registry.userDetailsService(mongoDBUserDetailsService);
-	}
+	}*/
 	
 	/*@Override
 	protected void configure(HttpSecurity http) throws Exception {

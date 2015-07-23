@@ -300,18 +300,16 @@
 											<p>&nbsp;${license.expirationDate}</p>
 										</blockquote>
 									</div>
-									<div class="col-sm-6 col-print-6 left-col">
-										<a class="btn btn-lg btn-primary" href="#">
-											<i class="fa fa-download fa-2x pull-left"></i> Download&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /><small>License File</small>
-										</a>
-									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-3 col-md-offset-6">
-										<div class="contextual-summary-info contextual-background green-bg" style="cursor: pointer;">
+										<div class="contextual-summary-info contextual-background green-bg" style="cursor: pointer;" id="download">
 											<i class="fa fa-download"></i>
 											<p class="pull-right"><span>Download</span> License File</p>
 										</div>
+										<form id="downloadFile">
+											<input type="hidden" name="genKey" value="${license.id}">
+										</form>
 									</div>									
 								</div>
 								
@@ -353,41 +351,14 @@
 	
 	<script type="text/javascript">
     
-    var licneseType;
-    
     $(function() {
     	
-		licenseType = $(":input:radio[name=type]:checked").val();
-    	 
-		$("#expirationDateSelect").hide();
-		
-		$(":input:radio[name=type]").click(function() {
+		$("#download").click(function() {
 			
-			licenseType = $(":input:radio[name=type]:checked").val();
-    		 
-			if (licenseType == "02") {
-				$("#expirationDateSelect").show();    			 
-			} else {
-				$("#expirationDateSelect").hide();
-			}
-		});
-		
-		$("#licenseSubmit").click(function() {
+			alert('download');
 			
-			if ($("#siteName").val() == '' || $("#siteName").val() == null) {
-				alert('site명을 입력해 주세요');
-				$("#siteName").focus();
-				return false;
-			}
-			
-			if ($("#hostName").val() == '' || $("#hostName").val() == null) {
-				alert('host명를 입력해 주세요');
-				$("#hostName").focus();
-				return false;
-			}
-			
-			$("#licenseForm")
-        		.attr({action:'publish', method:'post'})
+			$("#downloadFile")			
+        		.attr({action:'/license/download', method:'post'})
         		.submit();
 		});
 		

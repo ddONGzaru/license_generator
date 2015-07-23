@@ -144,7 +144,7 @@
 									            </c:otherwise>
 									        </c:choose>
 									        <c:forEach var="i" begin="${beginIndex}" end="${endIndex}">
-									            <c:url var="pageUrl" value="/license/history?page=${i}" />
+									            <c:url var="pageUrl" value="/license/history?page=${i-1}" />
 									            <c:choose>
 									                <c:when test="${i == currentIndex}">
 									                    <li class="active"><a href="${pageUrl}"><c:out value="${i}" /></a></li>

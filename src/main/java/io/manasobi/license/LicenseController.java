@@ -1,19 +1,23 @@
 package io.manasobi.license;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.StringReader;
 import java.security.Principal;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,7 +27,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.epapyrus.sdp.commons.utils.DateUtils;
@@ -33,19 +37,20 @@ import io.manasobi.commons.constant.Result;
 
 @Controller
 @PreAuthorize("hasRole('USER')")
+@RequestMapping(value = "/license")
 public class LicenseController {
 	
 	@Autowired
 	private LicenseService licenseService; 
 	
 	
-	@RequestMapping(value = "/license/publish", method = RequestMethod.GET)
+	@RequestMapping(value = "/publish", method = RequestMethod.GET)
 	public String main(Authentication auth) {
 		return "license/publish";
 	}
 	
 	//@PreAuthorize("isAuthenticated()")
-	@RequestMapping(value = "/license/publish", method = RequestMethod.POST)
+	@RequestMapping(value = "/publish", method = RequestMethod.POST)
 	public String publish(License license, RedirectAttributes redirectAttributes, Principal principal) {
 		
 		Result result = Result.EMPTY;
@@ -63,7 +68,7 @@ public class LicenseController {
 		return "redirect:/license/publish/result";
 	}
 	
-	@RequestMapping(value = "/license/publish/result")
+	@RequestMapping(value = "/publish/result")
 	public String publishResult(@ModelAttribute("licenseGenKey") String licenseKey, @ModelAttribute("error") String error, Model model) {
 		
 		if (licenseKey.equals("")) {
@@ -78,12 +83,12 @@ public class LicenseController {
 		return "license/publish-result";
 	}
 	
-	@RequestMapping(value = "/license/details", method = RequestMethod.GET)
+	@RequestMapping(value = "/details", method = RequestMethod.GET)
 	public String details() {
 		return "license/details";
 	}
 	
-	@RequestMapping(value = "/license/details", method = RequestMethod.POST)
+	@RequestMapping(value = "/details", method = RequestMethod.POST)
 	public String details(String licenseKey, Model model) {
 		
 		LicenseDetails licenseDetails = licenseService.findLiceseDetails(licenseKey);
@@ -103,32 +108,16 @@ public class LicenseController {
 		
 		simpleDate = StringUtils.replace(simpleDate, "T", " ");
 		simpleDate = StringUtils.remove(simpleDate, "Z");
-		
-		
-		
+
 		return StringUtils.substring(simpleDate, 0, 19);
 	}
 
-	@RequestMapping(value = "/license/history", method = RequestMethod.GET)
-	public String history(@RequestParam(required=false, defaultValue = "0") int page, 
-			@RequestParam(required=false, defaultValue = "10") int size,
-			@RequestParam(required=false, defaultValue = "desc") String sort,
-			@RequestParam(required=false, defaultValue = "createdDate") String sortField,
-			Model model) {
+	@RequestMapping(value = "/history", method = RequestMethod.GET)
+	public String history_get(@PageableDefault(sort = "createdDate", direction = Direction.DESC) Pageable pageable,	Model model) {
 		
-		Direction direction = null;
+		//curl -v http://localhost:8080/people/search/nameStartsWith?name=K&sort=name&name.dir=desc
 		
-		if (StringUtils.equalsIgnoreCase(sort, "asc")) {
-			direction = Direction.ASC;			
-		} else if (StringUtils.equalsIgnoreCase(sort, "desc")) {
-			direction = Direction.DESC;			
-		}
-		
-		if (page > 0) {
-			page--;
-		}
-		
-		Pageable pageable = new PageRequest(page, size, new Sort(direction, sortField));
+		//pageable = new PageRequest(page, size, new Sort(direction, sortField));
 			
 		Page<LicenseDetails> pageList = licenseService.findAllLiceseDetails(pageable);
 
@@ -150,7 +139,7 @@ public class LicenseController {
 		return "license/history";
 	}
 */
-	@RequestMapping(value = "/license/history", method = RequestMethod.POST)
+	@RequestMapping(value = "/history", method = RequestMethod.POST)
 	public String history(@PageableDefault Pageable pageable, String licenseKey, Model model) {
 		
 		Page<LicenseDetails> page = licenseService.findAllLiceseDetails(pageable);
@@ -184,7 +173,44 @@ public class LicenseController {
 	    model.addAttribute("recordCountPerPage", page.getSize());
 	}
 	
-	
-	
+	@RequestMapping(value = "/download", method = RequestMethod.POST)
+	@ResponseBody
+	public void download(String genKey, HttpServletResponse response) {
+		
+		LicenseDetails licenseDetails = licenseService.findLiceseDetails(genKey);
+		
+		String licenseKey = licenseDetails.getKey();
+		String licenseFileName = licenseDetails.getLicense().getSiteName() + ".cer";
+		
+		StringReader reader = new StringReader(licenseKey);
+		OutputStream outStream = null;
+		
+		try {
+ 
+			response.setContentLength(licenseKey.length());
+			response.setContentType("application/download; utf-8");			
+ 
+			// response header
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("attachment; filename=\"%s\"", licenseFileName);
+			
+			response.setHeader(headerKey, headerValue);
+ 
+			// Write response
+			outStream = response.getOutputStream();
+			
+			IOUtils.copy(reader, outStream);
+ 
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			IOUtils.closeQuietly(reader);
+			IOUtils.closeQuietly(outStream);
+		}
+		
+	}
 	
 }

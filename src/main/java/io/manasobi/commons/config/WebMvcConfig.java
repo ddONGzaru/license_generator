@@ -1,5 +1,7 @@
 package io.manasobi.commons.config;
 
+import java.util.List;
+
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter;
@@ -7,6 +9,9 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.data.web.SortHandlerMethodArgumentResolver;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.resource.ResourceUrlEncodingFilter;
@@ -47,4 +52,12 @@ public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
 		messageSource.setCacheSeconds(0);
 		return messageSource;
 	}
+    
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+
+    	resolvers.add(new SortHandlerMethodArgumentResolver());
+    	resolvers.add(new PageableHandlerMethodArgumentResolver());
+	}
+    
 }

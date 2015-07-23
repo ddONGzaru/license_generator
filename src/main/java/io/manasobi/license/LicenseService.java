@@ -29,6 +29,8 @@ public interface LicenseService {
 	
 	Page<LicenseDetails> findAllLiceseDetails(Pageable pageable);
 	
+	String findLicenseKey(String genKey);
+	
 	@Service("licenseService")
 	public class LicenseServiceImpl implements LicenseService {
 
@@ -127,6 +129,14 @@ public interface LicenseService {
 		public Page<LicenseDetails> findAllLiceseDetails(Pageable pageable) {
 			
 			return pagerRepo.findAll(pageable);
+		}
+
+		@Override
+		public String findLicenseKey(String genKey) {
+			
+			LicenseDetails licenseDetails = licenseRepo.findLicenseDetails(genKey);
+			
+			return licenseDetails.getKey();
 		}
 		
 	}

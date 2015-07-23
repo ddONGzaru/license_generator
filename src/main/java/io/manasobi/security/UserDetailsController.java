@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,6 +29,10 @@ public class UserDetailsController {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	
 	@PreAuthorize("hasRole('USER')")
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
@@ -64,7 +69,7 @@ public class UserDetailsController {
 			Client client = new Client();
 			
 			client.setUsername(username);
-			client.setPassword(password);
+			client.setPassword(passwordEncoder.encode(password));
 			client.setRoles(roles);
 			
 			Result result = userDetailsService.register(client);

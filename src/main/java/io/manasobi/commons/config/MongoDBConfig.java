@@ -15,37 +15,13 @@ import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
+import io.manasobi.commons.logger.MongoLoggingEventListener;
+
 @Configuration
 @EnableMongoRepositories("io.manasobi.license.pager")
 public class MongoDBConfig extends AbstractMongoConfiguration {
 
-	@Bean
-    public Jongo jongo() {
-		
-        DB db;
-        
-        try {
-            db = new MongoClient("127.0.0.1", 27017).getDB("manasobi");
-        } catch (UnknownHostException e) {
-            throw new MongoException("Connection error : ", e);
-        }
-        
-        return new Jongo(db);
-    }
-
-    @Bean
-    public MongoCollection users() {
-        return jongo().getCollection("users");
-    }
-
-    @Bean
-    public MongoCollection licenseDetailsRepo() {
-    	return jongo().getCollection("licenseDetails");
-    }
-
-    
-    
-    @Value("${spring.data.mongodb.host:127.0.0.1}")
+	@Value("${spring.data.mongodb.host:127.0.0.1}")
 	private String host;
 
 	@Value("${spring.data.mongodb.port:27017}")
@@ -53,6 +29,7 @@ public class MongoDBConfig extends AbstractMongoConfiguration {
 	
 	@Value("${spring.data.mongodb.database:manasobi}")
 	private String database;
+	
 	
 	@Override
 	protected String getDatabaseName() {
@@ -70,6 +47,33 @@ public class MongoDBConfig extends AbstractMongoConfiguration {
 	}
 	
 	
+	@Bean
+    public Jongo jongo() {
+		
+        DB db;
+        
+        try {
+            //db = new MongoClient("127.0.0.1", 27017).getDB("manasobi");
+            db = new MongoClient(host, port).getDB(database);
+        } catch (UnknownHostException e) {
+            throw new MongoException("Connection error : ", e);
+        }
+        
+        return new Jongo(db);
+    }
+
+    @Bean
+    public MongoCollection users() {
+        return jongo().getCollection("users");
+    }
+
+    @Bean
+    public MongoCollection licenseDetailsRepo() {
+    	return jongo().getCollection("licenseDetails");
+    }
     
-    
+    @Bean
+	public MongoLoggingEventListener mappingEventsListener() {
+		return new MongoLoggingEventListener();
+	}
 }

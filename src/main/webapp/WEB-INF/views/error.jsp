@@ -43,6 +43,8 @@
 			</h1>
 
 			<p style="font-size: 1.5em;">${errMsg}</p>
+			<p style="font-size: 1.5em;">${exception}</p>
+			
 			
 			<div>
 				<a href="/" class="btn btn-primary"><i class="fa fa-home"></i> Home</a>
