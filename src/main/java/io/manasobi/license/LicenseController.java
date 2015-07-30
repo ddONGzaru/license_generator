@@ -57,7 +57,9 @@ public class LicenseController {
 			redirectAttributes.addFlashAttribute("error", result.getMessage());
 		}
 		
-		result = licenseService.saveLicenseDetails(principal.getName(), license);
+		String userName = principal == null ? "" : principal.getName();
+		
+		result = licenseService.saveLicenseDetails(userName, license);
 		
 		return "redirect:/license/publish/result";
 	}
