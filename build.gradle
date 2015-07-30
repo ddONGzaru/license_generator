@@ -22,6 +22,8 @@ apply plugin: 'io.spring.dependency-management'
 apply from:   'dependencies.gradle'
 
 apply plugin: "jacoco"
+apply plugin: 'findbugs'
+apply plugin: 'checkstyle'
 
 // java version
 sourceCompatibility = 1.8
@@ -93,6 +95,17 @@ test {
         //includes = ['com/bla/**']
         append = false
     }
+}
+
+findbugs {
+	ignoreFailures = true
+}
+
+checkstyle {
+
+	println rootDir
+	configFile = new File(rootDir, "config/manasobi-checkstyle.xml")
+	ignoreFailures = true
 }
 
 /*
